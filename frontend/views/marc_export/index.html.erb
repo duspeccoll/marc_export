@@ -1,0 +1,21 @@
+<%= setup_context :title => I18n.t("plugins.marc_export.title") %>
+
+<div class="row">
+  <div class="col-md-8">
+    <%= render_aspace_partial :partial => "shared/flash_messages" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8" style="padding-bottom: 10px;">
+    <h1><%= I18n.t("plugins.marc_export.title") %></h1>
+    <p><%= I18n.t("plugins.marc_export.description") %></p>
+    <%= form_tag({:controller => :marc_export, :action => :export}, {:class => "form-horizontal", :id => "marc_export_form"}) do |form| %>
+      <div class="control-group form-group required">
+        <label class="control-label" for="days">Days since last update: </label>
+        <input id="days" name="days" type="text" class="input-large"></input>
+        <%= submit_tag I18n.t("plugins.marc_export.actions.download"), :class => "btn btn-sm btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
