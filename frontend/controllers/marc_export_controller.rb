@@ -1,4 +1,4 @@
-class MarcExportController < ExportsController
+class MarcExportController < ApplicationController
 
   set_access_control "view_repository" => [:index, :export]
 
@@ -17,6 +17,7 @@ class MarcExportController < ExportsController
         }
       end
     else
+      # there must be a better way to override the default Sinatra::NotFound message on a 404
       error = case response.code
       when '404'
         "'days' is a required parameter"
