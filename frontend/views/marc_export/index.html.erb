@@ -10,7 +10,7 @@
   <div class="col-md-8" style="padding-bottom: 10px;">
     <h1><%= I18n.t("plugins.marc_export.title") %></h1>
     <p><%= I18n.t("plugins.marc_export.description") %></p>
-    <%= form_tag({:controller => :marc_export, :action => :export}, {:class => "form-horizontal", :id => "marc_export_form", :method => "GET"}) do |form| %>
+    <%= form_tag({:controller => :marc_export, :action => :export}, {:class => "form-horizontal", :id => "marc_export_form", :method => "POST"}) do |form| %>
       <div class="control-group form-group required">
         <label class="control-label" for="days">Days since last update: </label>
         <input id="days" name="days" type="text" class="input-large"></input>
