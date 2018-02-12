@@ -41,7 +41,11 @@ class ArchivesSpaceService < Sinatra::Base
 
       ids = dataset.select(:id).map{|rec| rec[:id]}
 
-      marc_export_builder(ids)
+      if ids.empty?
+        raise StandardError, 'No new or updated resources for the time period'
+      else
+        marc_export_builder(ids)
+      end
     else
       raise StandardError, 'Value must be a valid integer or float point decimal'
     end
