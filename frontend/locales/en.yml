@@ -1,9 +1,0 @@
-en:
-  plugins:
-    marc_export:
-      label: MARC Export
-      title: MARC Record Export
-      description: Exports all MARC representations of collections created or modified within the date range provided.
-      error: "<strong>Error:</strong> %{error}"
-      actions:
-        download: Download

@@ -1,9 +1,9 @@
 class ArchivesSpaceService < Sinatra::Base
 
-  Endpoint.post('/repositories/:repo_id/marc_export/:days')
+  Endpoint.post('/repositories/:repo_id/marc_export')
     .description("Download MARC records for all collections updated in the given time period")
     .params(["repo_id", :repo_id],
-            ["days", String, "Record updated in the last X days"])
+            ["modified_since", String, "Time since the last MARC export"])
     .permissions([])
     .returns([200, "OK"]) \
   do
@@ -34,10 +34,9 @@ class ArchivesSpaceService < Sinatra::Base
   end
 
   def marc_export(params)
-    if is_number?(params[:days])
+    if is_number?(params[:modified_since])
       dataset = CrudHelpers.scoped_dataset(Resource, {})
-      modified_since_time = Time.at((DateTime.now-(params[:days].to_i)).to_time.to_i)
-      dataset = dataset.where { system_mtime >= modified_since_time }
+      dataset = dataset.where { system_mtime >= Time.at(params[:modified_since].to_i) }
 
       ids = dataset.select(:id).map{|rec| rec[:id]}
 
